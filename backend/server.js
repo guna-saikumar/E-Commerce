@@ -30,6 +30,21 @@ app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/cart', cartRoutes);
 
+// Root endpoint
+app.get('/', (req, res) => {
+  res.json({
+    message: 'Welcome to the ShopVault API',
+    status: 'active',
+    version: '1.0.0',
+    endpoints: {
+      products: '/api/products',
+      auth: '/api/auth',
+      cart: '/api/cart',
+      health: '/api/health'
+    }
+  });
+});
+
 // Health check
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
