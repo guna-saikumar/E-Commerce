@@ -1,0 +1,27 @@
+# Node modules
+node_modules/
+**/node_modules/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Build directories
+dist/
+build/
+**/dist/
+**/build/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Editor configurations
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
