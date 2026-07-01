@@ -507,14 +507,14 @@ export default function AdminPanel() {
   return (
     <div className="admin-layout">
       {/* Admin Header */}
-      <header className="navbar">
+      <header className="navbar admin-navbar-header">
         <div className="container navbar__inner">
-          <div className="navbar__logo" style={{ cursor: 'default' }}>
+          <div className="navbar__logo admin-navbar-logo" style={{ cursor: 'default' }}>
             <i className="fas fa-store"></i>
             <span>ShopVault</span>
-            <span className="admin-badge" style={{ marginLeft: 8 }}>Admin</span>
+            <span className="admin-badge admin-navbar-badge" style={{ marginLeft: 8 }}>Admin</span>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+          <div className="admin-navbar-actions" style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
             <button
               type="button"
               className="admin-profile-trigger-btn"
@@ -544,36 +544,32 @@ export default function AdminPanel() {
               ) : (
                 <i className="fas fa-circle-user" style={{ color: 'var(--clr-primary)', fontSize: '1.2rem' }}></i>
               )}
-              <span style={{ fontWeight: 600 }}>{admin?.fullName || admin?.email}</span>
+              <span className="admin-navbar-profile-name" style={{ fontWeight: 600 }}>{admin?.fullName || admin?.email}</span>
             </button>
-            <button className="btn btn-danger" style={{ padding: '8px 14px' }} onClick={logout}>
+            <button className="btn btn-danger admin-navbar-logout-btn" style={{ padding: '8px 14px' }} onClick={logout}>
               <i className="fas fa-right-from-bracket"></i>
-              Logout
+              <span className="admin-navbar-logout-text">Logout</span>
             </button>
           </div>
         </div>
       </header>
 
       {/* Stats row */}
-      <div style={{ background: 'var(--clr-surface)', borderBottom: '1px solid var(--clr-border)', padding: '16px 32px' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', display: 'flex', gap: 32 }}>
+      <div className="admin-stats-row">
+        <div className="admin-stats-container">
           {[
             { icon: 'fa-box', label: 'Total Products', value: products.length },
             { icon: 'fa-circle-check', label: 'In Stock', value: products.filter(p => p.stock > 0).length },
             { icon: 'fa-triangle-exclamation', label: 'Out of Stock', value: products.filter(p => p.stock === 0).length },
             { icon: 'fa-indian-rupee-sign', label: 'Avg. Price', value: products.length ? `₹${(products.reduce((s, p) => s + p.price, 0) / products.length).toFixed(2)}` : '₹0' },
           ].map(stat => (
-            <div key={stat.label} style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-              <div style={{
-                width: 40, height: 40, background: 'rgba(108,99,255,0.12)', borderRadius: 10,
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                color: 'var(--clr-primary)', fontSize: '1rem'
-              }}>
+            <div key={stat.label} className="admin-stat-card">
+              <div className="admin-stat-icon-wrap">
                 <i className={`fas ${stat.icon}`}></i>
               </div>
-              <div>
-                <div style={{ fontSize: '1.1rem', fontWeight: 800 }}>{stat.value}</div>
-                <div style={{ fontSize: '0.75rem', color: 'var(--clr-muted)' }}>{stat.label}</div>
+              <div className="admin-stat-info">
+                <div className="admin-stat-value">{stat.value}</div>
+                <div className="admin-stat-label">{stat.label}</div>
               </div>
             </div>
           ))}
