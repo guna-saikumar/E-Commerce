@@ -1,12 +1,26 @@
 import { useCart } from '../context/CartContext';
 import { resolveImg } from '../pages/Home';
 import { useAlert } from '../context/AlertContext';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const PLACEHOLDER = 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400';
 
 export default function CartSidebar({ onClose }) {
   const { cart, removeItem, updateQty, totalPrice } = useCart();
   const { showAlert } = useAlert();
+  const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+
+  const handleCheckout = () => {
+    if (!isAuthenticated) {
+      onClose();
+      showAlert('Please login or register to checkout!', 'Authentication Required', 'error');
+      navigate('/login');
+    } else {
+      showAlert('Checkout coming soon! 🎉', 'Coming Soon', 'success');
+    }
+  };
 
   return (
     <>
@@ -51,7 +65,7 @@ export default function CartSidebar({ onClose }) {
               </div>
               <button
                 className="btn-checkout"
-                onClick={() => showAlert('Checkout coming soon! 🎉', 'Coming Soon', 'success')}
+                onClick={handleCheckout}
               >
                 <i className="fas fa-lock"></i>
                 Checkout Securely
