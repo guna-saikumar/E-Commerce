@@ -213,7 +213,7 @@ export default function Profile() {
           {!isEditing && (
             <div className="profile-stats-grid" style={{ marginBottom: 24 }}>
               <div className="stat-box">
-                <span className="stat-num">12</span>
+                <span className="stat-num">0</span>
                 <span className="stat-label">Orders</span>
               </div>
               <div className="stat-box">
