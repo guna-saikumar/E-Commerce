@@ -18,7 +18,7 @@ export default function CartSidebar({ onClose }) {
       showAlert('Please login or register to checkout!', 'Authentication Required', 'error');
       navigate('/login');
     } else {
-      showAlert('Checkout coming soon! 🎉', 'Coming Soon', 'success');
+      showAlert('Checkout coming soon!', 'Coming Soon', 'success');
     }
   };
 
